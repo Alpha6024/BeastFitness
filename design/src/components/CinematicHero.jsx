@@ -54,6 +54,8 @@ const CinematicHero = () => {
         start: 'top top',
         end: 'bottom bottom',
         scrub: 0.5,
+        pin: canvas.parentElement,
+        pinSpacing: false,
       },
       onUpdate: () => {
         renderFrame(frameAnimation.frame);
@@ -96,15 +98,16 @@ const CinematicHero = () => {
   }
 
   return (
-    <section ref={containerRef} className="relative w-full" style={{ height: '300vh' }}>
-      {/* Fixed Canvas Background */}
-      <div className="fixed top-0 left-0 w-full h-screen" style={{ zIndex: 0 }}>
-        <canvas ref={canvasRef} className="w-full h-full" />
-        <div className="absolute inset-0 bg-black/30" />
-      </div>
+    <div className="relative w-full" style={{ height: '300vh' }}>
+      <section ref={containerRef} className="relative w-full h-full">
+        {/* Fixed Canvas Background - only within this section */}
+        <div ref={(el) => el && (canvasRef.current.parentElement = el)} className="sticky top-0 w-full h-screen" style={{ zIndex: 0 }}>
+          <canvas ref={canvasRef} className="w-full h-full" />
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
 
-      {/* Scrolling Content */}
-      <div className="relative w-full" style={{ height: '300vh', zIndex: 1 }}>
+        {/* Scrolling Content */}
+        <div className="relative w-full" style={{ height: '300vh', zIndex: 1 }}>
         {/* Section 1 - Beast Fitness */}
         <div className="h-screen flex items-center justify-center px-4 w-full">
           <div className="text-center max-w-5xl w-full">
@@ -203,6 +206,7 @@ const CinematicHero = () => {
         </motion.div>
       </motion.div>
     </section>
+    </div>
   );
 };
 

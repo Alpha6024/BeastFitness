@@ -66,6 +66,11 @@ const CinematicHero = () => {
     };
   }, [frames, loading]);
 
+  useEffect(() => {
+    // Scroll to top on mount
+    window.scrollTo(0, 0);
+  }, []);
+
   if (loading) {
     return (
       <div className="loading-screen">
@@ -94,13 +99,13 @@ const CinematicHero = () => {
   return (
     <section ref={containerRef} className="relative w-full overflow-hidden" style={{ minHeight: '400vh' }}>
       {/* Fixed Canvas */}
-      <div className="sticky top-0 w-full h-screen overflow-hidden">
+      <div className="fixed top-0 left-0 w-full h-screen overflow-hidden" style={{ zIndex: 0 }}>
         <canvas ref={canvasRef} className="w-full h-full" />
         <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* Content Sections */}
-      <div className="absolute top-0 left-0 w-full" style={{ height: '400vh' }}>
+      <div className="relative" style={{ height: '400vh', zIndex: 1 }}>
         {/* Section 1 */}
         <div className="h-screen flex items-center justify-center px-4 w-full">
           <div className="text-center max-w-5xl w-full">
@@ -209,7 +214,8 @@ const CinematicHero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50"
+        className="fixed bottom-10 left-1/2 transform -translate-x-1/2"
+        style={{ zIndex: 50 }}
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

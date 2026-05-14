@@ -1,6 +1,6 @@
-import { StrictMode } from 'react';
+import { StrictMode, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, useLocation } from 'react-router-dom';
 import './index.css';
 import App from './App.jsx';
 import Home from './pages/Home.jsx';
@@ -10,10 +10,31 @@ import Membership from './pages/Membership.jsx';
 import Gallery from './pages/Gallery.jsx';
 import Contact from './pages/Contact.jsx';
 
+// Scroll to top component
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
+// Wrapper component with ScrollToTop
+function AppWrapper() {
+  return (
+    <>
+      <ScrollToTop />
+      <App />
+    </>
+  );
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <AppWrapper />,
     children: [
       { index: true, element: <Home /> },
       { path: 'about', element: <About /> },

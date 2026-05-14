@@ -30,6 +30,13 @@ export const SmoothScrollProvider = ({ children }) => {
     };
   }, []);
 
+  // Scroll to top method
+  useEffect(() => {
+    if (lenisRef.current) {
+      lenisRef.current.scrollTo(0, { immediate: true });
+    }
+  }, []);
+
   return (
     <SmoothScrollContext.Provider value={lenisRef.current}>
       {children}

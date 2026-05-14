@@ -98,14 +98,14 @@ const CinematicHero = () => {
 
   return (
     <div className="relative w-full" style={{ height: '300vh' }}>
-      {/* Sticky Canvas Background - stays for all 300vh */}
-      <div className="sticky top-0 w-full h-screen" style={{ zIndex: 0 }}>
+      {/* Canvas Background - Fixed position to stay for all 3 screens */}
+      <div className="fixed top-0 left-0 w-full h-screen" style={{ zIndex: 0 }}>
         <canvas ref={canvasRef} className="w-full h-full" />
         <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* Scrolling Content - overlays the canvas */}
-      <div ref={containerRef} className="absolute top-0 left-0 w-full" style={{ height: '300vh', zIndex: 1 }}>
+      <div ref={containerRef} className="relative w-full" style={{ height: '300vh', zIndex: 1 }}>
           {/* Section 1 - Beast Fitness */}
           <div className="h-screen flex items-center justify-center px-4 w-full">
             <div className="text-center max-w-5xl w-full">

@@ -9,9 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 const CinematicHero = () => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
-  const textSection1Ref = useRef(null);
-  const textSection2Ref = useRef(null);
-  const textSection3Ref = useRef(null);
   const { frames, loading, progress } = useFramePreloader(32, 4);
 
   useEffect(() => {
@@ -55,71 +52,13 @@ const CinematicHero = () => {
       scrollTrigger: {
         trigger: container,
         start: 'top top',
-        end: '+=300%',
+        end: 'bottom bottom',
         scrub: 0.5,
-        pin: true,
       },
       onUpdate: () => {
         renderFrame(frameAnimation.frame);
       },
     });
-
-    // Animate text sections
-    gsap.fromTo(
-      textSection1Ref.current,
-      { opacity: 1 },
-      {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: container,
-          start: 'top top',
-          end: '+=100%',
-          scrub: 1,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      textSection2Ref.current,
-      { opacity: 0 },
-      {
-        opacity: 1,
-        scrollTrigger: {
-          trigger: container,
-          start: 'top top',
-          end: '+=100%',
-          scrub: 1,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      textSection2Ref.current,
-      { opacity: 1 },
-      {
-        opacity: 0,
-        scrollTrigger: {
-          trigger: container,
-          start: '+=100%',
-          end: '+=200%',
-          scrub: 1,
-        },
-      }
-    );
-
-    gsap.fromTo(
-      textSection3Ref.current,
-      { opacity: 0 },
-      {
-        opacity: 1,
-        scrollTrigger: {
-          trigger: container,
-          start: '+=100%',
-          end: '+=200%',
-          scrub: 1,
-        },
-      }
-    );
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -157,93 +96,99 @@ const CinematicHero = () => {
   }
 
   return (
-    <section ref={containerRef} className="relative w-full h-screen overflow-hidden">
-      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
-      <div className="absolute inset-0 bg-black/30" />
-      
-      {/* Text Section 1 - Initial */}
-      <div ref={textSection1Ref} className="absolute inset-0 flex items-center justify-center px-4 w-full" style={{ zIndex: 10 }}>
-        <div className="text-center max-w-5xl w-full">
-          <motion.h1
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
-            style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
-          >
-            BEAST FITNESS
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 font-light tracking-wide"
-            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
-          >
-            UNLEASH YOUR INNER BEAST
-          </motion.p>
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
-          >
-            START YOUR JOURNEY
-          </motion.button>
+    <section ref={containerRef} className="relative w-full" style={{ height: '300vh' }}>
+      {/* Fixed Canvas Background */}
+      <div className="sticky top-0 w-full h-screen overflow-hidden">
+        <canvas ref={canvasRef} className="w-full h-full" />
+        <div className="absolute inset-0 bg-black/30" />
+      </div>
+
+      {/* Scrolling Content */}
+      <div className="absolute top-0 left-0 w-full" style={{ height: '300vh' }}>
+        {/* Section 1 - Beast Fitness */}
+        <div className="h-screen flex items-center justify-center px-4 w-full">
+          <div className="text-center max-w-5xl w-full">
+            <motion.h1
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
+              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
+            >
+              BEAST FITNESS
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 font-light tracking-wide"
+              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+            >
+              UNLEASH YOUR INNER BEAST
+            </motion.p>
+            <motion.button
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
+            >
+              START YOUR JOURNEY
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Section 2 - Transform */}
+        <div className="h-screen flex items-center justify-center px-4 w-full">
+          <div className="text-center max-w-4xl w-full">
+            <h2 
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
+              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
+            >
+              TRANSFORM
+            </h2>
+            <p 
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-light"
+              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+            >
+              Your body. Your mind. Your life.
+            </p>
+          </div>
+        </div>
+
+        {/* Section 3 - Elite Training */}
+        <div className="h-screen flex items-center justify-center px-4 w-full">
+          <div className="text-center max-w-4xl w-full">
+            <h2 
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
+              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
+            >
+              ELITE TRAINING
+            </h2>
+            <p 
+              className="text-base sm:text-lg md:text-2xl lg:text-3xl text-white font-light mb-6 md:mb-8"
+              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+            >
+              World-class facilities. Expert trainers. Premium experience.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
+            >
+              EXPLORE MEMBERSHIP
+            </motion.button>
+          </div>
         </div>
       </div>
 
-      {/* Text Section 2 - Transform */}
-      <div ref={textSection2Ref} className="absolute inset-0 flex items-center justify-center px-4 w-full" style={{ zIndex: 10, opacity: 0 }}>
-        <div className="text-center max-w-4xl w-full">
-          <h2 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
-            style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
-          >
-            TRANSFORM
-          </h2>
-          <p 
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-light"
-            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
-          >
-            Your body. Your mind. Your life.
-          </p>
-        </div>
-      </div>
-
-      {/* Text Section 3 - Elite Training */}
-      <div ref={textSection3Ref} className="absolute inset-0 flex items-center justify-center px-4 w-full" style={{ zIndex: 10, opacity: 0 }}>
-        <div className="text-center max-w-4xl w-full">
-          <h2 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
-            style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
-          >
-            ELITE TRAINING
-          </h2>
-          <p 
-            className="text-base sm:text-lg md:text-2xl lg:text-3xl text-white font-light mb-6 md:mb-8"
-            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
-          >
-            World-class facilities. Expert trainers. Premium experience.
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
-          >
-            EXPLORE MEMBERSHIP
-          </motion.button>
-        </div>
-      </div>
-
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        style={{ zIndex: 20 }}
+        className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 const CinematicHero = () => {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
+  const canvasContainerRef = useRef(null);
   const { frames, loading, progress } = useFramePreloader(32, 4);
 
   useEffect(() => {
@@ -54,8 +55,6 @@ const CinematicHero = () => {
         start: 'top top',
         end: 'bottom bottom',
         scrub: 0.5,
-        pin: canvas.parentElement,
-        pinSpacing: false,
       },
       onUpdate: () => {
         renderFrame(frameAnimation.frame);
@@ -98,114 +97,114 @@ const CinematicHero = () => {
   }
 
   return (
-    <div className="relative w-full" style={{ height: '300vh' }}>
+    <div className="relative w-full overflow-hidden" style={{ height: '300vh' }}>
       <section ref={containerRef} className="relative w-full h-full">
-        {/* Fixed Canvas Background - only within this section */}
-        <div ref={(el) => el && (canvasRef.current.parentElement = el)} className="sticky top-0 w-full h-screen" style={{ zIndex: 0 }}>
+        {/* Sticky Canvas Background */}
+        <div ref={canvasContainerRef} className="sticky top-0 w-full h-screen" style={{ zIndex: 0 }}>
           <canvas ref={canvasRef} className="w-full h-full" />
           <div className="absolute inset-0 bg-black/30" />
         </div>
 
         {/* Scrolling Content */}
-        <div className="relative w-full" style={{ height: '300vh', zIndex: 1 }}>
-        {/* Section 1 - Beast Fitness */}
-        <div className="h-screen flex items-center justify-center px-4 w-full">
-          <div className="text-center max-w-5xl w-full">
-            <motion.h1
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
-              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
-            >
-              BEAST FITNESS
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 font-light tracking-wide"
-              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
-            >
-              UNLEASH YOUR INNER BEAST
-            </motion.p>
-            <motion.button
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
-            >
-              START YOUR JOURNEY
-            </motion.button>
+        <div className="absolute top-0 left-0 w-full" style={{ height: '300vh', zIndex: 1 }}>
+          {/* Section 1 - Beast Fitness */}
+          <div className="h-screen flex items-center justify-center px-4 w-full">
+            <div className="text-center max-w-5xl w-full">
+              <motion.h1
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
+                style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
+              >
+                BEAST FITNESS
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.3 }}
+                className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 font-light tracking-wide"
+                style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+              >
+                UNLEASH YOUR INNER BEAST
+              </motion.p>
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
+              >
+                START YOUR JOURNEY
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Section 2 - Transform */}
+          <div className="h-screen flex items-center justify-center px-4 w-full">
+            <div className="text-center max-w-4xl w-full">
+              <h2 
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
+                style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
+              >
+                TRANSFORM
+              </h2>
+              <p 
+                className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-light"
+                style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+              >
+                Your body. Your mind. Your life.
+              </p>
+            </div>
+          </div>
+
+          {/* Section 3 - Elite Training */}
+          <div className="h-screen flex items-center justify-center px-4 w-full">
+            <div className="text-center max-w-4xl w-full">
+              <h2 
+                className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
+                style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
+              >
+                ELITE TRAINING
+              </h2>
+              <p 
+                className="text-base sm:text-lg md:text-2xl lg:text-3xl text-white font-light mb-6 md:mb-8"
+                style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+              >
+                World-class facilities. Expert trainers. Premium experience.
+              </p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
+              >
+                EXPLORE MEMBERSHIP
+              </motion.button>
+            </div>
           </div>
         </div>
 
-        {/* Section 2 - Transform */}
-        <div className="h-screen flex items-center justify-center px-4 w-full">
-          <div className="text-center max-w-4xl w-full">
-            <h2 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
-              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
-            >
-              TRANSFORM
-            </h2>
-            <p 
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-light"
-              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
-            >
-              Your body. Your mind. Your life.
-            </p>
-          </div>
-        </div>
-
-        {/* Section 3 - Elite Training */}
-        <div className="h-screen flex items-center justify-center px-4 w-full">
-          <div className="text-center max-w-4xl w-full">
-            <h2 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
-              style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
-            >
-              ELITE TRAINING
-            </h2>
-            <p 
-              className="text-base sm:text-lg md:text-2xl lg:text-3xl text-white font-light mb-6 md:mb-8"
-              style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
-            >
-              World-class facilities. Expert trainers. Premium experience.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
-            >
-              EXPLORE MEMBERSHIP
-            </motion.button>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1 }}
-        className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50"
-      >
+        {/* Scroll Indicator */}
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-white text-sm flex flex-col items-center"
-          style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+          className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-50"
         >
-          <span className="mb-2 font-medium">SCROLL</span>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M12 5v14M19 12l-7 7-7-7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="text-white text-sm flex flex-col items-center"
+            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
+          >
+            <span className="mb-2 font-medium">SCROLL</span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 5v14M19 12l-7 7-7-7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </section>
+      </section>
     </div>
   );
 };

@@ -18,6 +18,7 @@ const CinematicHero = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
     const container = containerRef.current;
+    const canvasContainer = canvas.parentElement;
 
     const setCanvasSize = () => {
       canvas.width = window.innerWidth;
@@ -58,6 +59,25 @@ const CinematicHero = () => {
       },
       onUpdate: () => {
         renderFrame(frameAnimation.frame);
+      },
+    });
+
+    // Hide canvas after hero section ends
+    ScrollTrigger.create({
+      trigger: container,
+      start: 'top top',
+      end: 'bottom top',
+      onEnter: () => {
+        canvasContainer.style.display = 'block';
+      },
+      onLeave: () => {
+        canvasContainer.style.display = 'none';
+      },
+      onEnterBack: () => {
+        canvasContainer.style.display = 'block';
+      },
+      onLeaveBack: () => {
+        canvasContainer.style.display = 'none';
       },
     });
 

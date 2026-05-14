@@ -6,7 +6,7 @@ import { SmoothScrollProvider } from './context/SmoothScrollContext';
 function App() {
   return (
     <SmoothScrollProvider>
-      <div className="relative">
+      <div className="relative overflow-x-hidden w-full">
         {/* Noise Overlay */}
         <div className="noise-overlay" />
         
@@ -14,7 +14,7 @@ function App() {
         <Navbar />
         
         {/* Main Content */}
-        <main>
+        <main className="w-full overflow-x-hidden">
           <Outlet />
         </main>
         

@@ -69,30 +69,30 @@ const CinematicHero = () => {
   if (loading) {
     return (
       <div className="loading-screen">
-        <div className="text-center">
+        <div className="text-center w-full max-w-sm px-4">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-4xl md:text-6xl font-bold gradient-text mb-4"
+            className="text-3xl sm:text-4xl md:text-6xl font-bold gradient-text mb-4"
           >
             BEAST FITNESS
           </motion.div>
-          <div className="w-64 h-1 bg-gray-800 rounded-full overflow-hidden mx-auto">
+          <div className="w-full max-w-xs h-1 bg-gray-800 rounded-full overflow-hidden mx-auto">
             <motion.div
               className="h-full bg-white"
               style={{ width: `${progress}%` }}
               transition={{ duration: 0.1 }}
             />
           </div>
-          <p className="text-gray-400 mt-4">{progress}%</p>
-          <p className="text-gray-600 text-sm mt-2">Loading cinematic experience...</p>
+          <p className="text-gray-400 mt-4 text-sm sm:text-base">{progress}%</p>
+          <p className="text-gray-600 text-xs sm:text-sm mt-2">Loading cinematic experience...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <section ref={containerRef} className="relative w-full" style={{ minHeight: '400vh' }}>
+    <section ref={containerRef} className="relative w-full overflow-hidden" style={{ minHeight: '400vh' }}>
       {/* Fixed Canvas */}
       <div className="sticky top-0 w-full h-screen overflow-hidden">
         <canvas ref={canvasRef} className="w-full h-full" />
@@ -102,13 +102,13 @@ const CinematicHero = () => {
       {/* Content Sections */}
       <div className="absolute top-0 left-0 w-full" style={{ height: '400vh' }}>
         {/* Section 1 */}
-        <div className="h-screen flex items-center justify-center px-4">
-          <div className="text-center max-w-5xl">
+        <div className="h-screen flex items-center justify-center px-4 w-full">
+          <div className="text-center max-w-5xl w-full">
             <motion.h1
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
-              className="text-5xl sm:text-7xl lg:text-9xl font-black text-white mb-4 md:mb-6 tracking-tighter"
+              className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
               style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
             >
               BEAST FITNESS
@@ -117,7 +117,7 @@ const CinematicHero = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="text-lg sm:text-xl lg:text-2xl text-white mb-6 md:mb-8 font-light tracking-wide"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 font-light tracking-wide"
               style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
             >
               UNLEASH YOUR INNER BEAST
@@ -128,7 +128,7 @@ const CinematicHero = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="premium-btn bg-white text-black px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-full"
+              className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
             >
               START YOUR JOURNEY
             </motion.button>
@@ -136,16 +136,16 @@ const CinematicHero = () => {
         </div>
 
         {/* Section 2 */}
-        <div className="h-screen flex items-center justify-center px-4">
-          <div className="text-center max-w-4xl">
+        <div className="h-screen flex items-center justify-center px-4 w-full">
+          <div className="text-center max-w-4xl w-full">
             <h2 
-              className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
               style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
             >
               TRANSFORM
             </h2>
             <p 
-              className="text-xl sm:text-2xl lg:text-3xl text-white font-light"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-light"
               style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
             >
               Your body. Your mind. Your life.
@@ -154,16 +154,16 @@ const CinematicHero = () => {
         </div>
 
         {/* Section 3 */}
-        <div className="h-screen flex items-center justify-center px-4">
-          <div className="text-center max-w-4xl">
+        <div className="h-screen flex items-center justify-center px-4 w-full">
+          <div className="text-center max-w-4xl w-full">
             <h2 
-              className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
               style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
             >
               ELITE TRAINING
             </h2>
             <p 
-              className="text-lg sm:text-2xl lg:text-3xl text-white font-light mb-6 md:mb-8"
+              className="text-base sm:text-lg md:text-2xl lg:text-3xl text-white font-light mb-6 md:mb-8"
               style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
             >
               World-class facilities. Expert trainers. Premium experience.
@@ -171,7 +171,7 @@ const CinematicHero = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="premium-btn bg-white text-black px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-full"
+              className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
             >
               EXPLORE MEMBERSHIP
             </motion.button>
@@ -179,16 +179,16 @@ const CinematicHero = () => {
         </div>
 
         {/* Section 4 */}
-        <div className="h-screen flex items-center justify-center px-4">
-          <div className="text-center max-w-4xl">
+        <div className="h-screen flex items-center justify-center px-4 w-full">
+          <div className="text-center max-w-4xl w-full">
             <h2 
-              className="text-5xl sm:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white mb-4 md:mb-6 tracking-tighter leading-tight"
               style={{ textShadow: '0 4px 20px rgba(0,0,0,0.8)' }}
             >
               JOIN THE ELITE
             </h2>
             <p 
-              className="text-lg sm:text-2xl lg:text-3xl text-white font-light mb-6 md:mb-8"
+              className="text-base sm:text-lg md:text-2xl lg:text-3xl text-white font-light mb-6 md:mb-8"
               style={{ textShadow: '0 2px 10px rgba(0,0,0,0.8)' }}
             >
               Limited memberships available
@@ -196,7 +196,7 @@ const CinematicHero = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="premium-btn bg-white text-black px-8 sm:px-12 py-3 sm:py-4 text-base sm:text-lg font-bold rounded-full"
+              className="premium-btn bg-white text-black px-6 sm:px-10 md:px-12 py-3 sm:py-4 text-sm sm:text-base md:text-lg font-bold rounded-full"
             >
               APPLY NOW
             </motion.button>

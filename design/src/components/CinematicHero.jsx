@@ -68,16 +68,16 @@ const CinematicHero = () => {
       start: 'top top',
       end: 'bottom top',
       onEnter: () => {
-        canvasContainer.style.display = 'block';
+        gsap.to(canvasContainer, { opacity: 1, duration: 0.3 });
       },
       onLeave: () => {
-        canvasContainer.style.display = 'none';
+        gsap.to(canvasContainer, { opacity: 0, duration: 0.5 });
       },
       onEnterBack: () => {
-        canvasContainer.style.display = 'block';
+        gsap.to(canvasContainer, { opacity: 1, duration: 0.3 });
       },
       onLeaveBack: () => {
-        canvasContainer.style.display = 'none';
+        gsap.to(canvasContainer, { opacity: 0, duration: 0.5 });
       },
     });
 
@@ -119,7 +119,7 @@ const CinematicHero = () => {
   return (
     <div className="relative w-full" style={{ height: '300vh' }}>
       {/* Canvas Background - Fixed position to stay for all 3 screens */}
-      <div className="fixed top-0 left-0 w-full h-screen" style={{ zIndex: 0 }}>
+      <div className="fixed top-0 left-0 w-full h-screen transition-opacity duration-500" style={{ zIndex: 0 }}>
         <canvas ref={canvasRef} className="w-full h-full" />
         <div className="absolute inset-0 bg-black/30" />
       </div>

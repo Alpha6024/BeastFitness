@@ -80,12 +80,12 @@ const CinematicHero = () => {
           <div className="w-64 h-1 bg-gray-800 rounded-full overflow-hidden mx-auto">
             <motion.div
               className="h-full bg-white"
-              initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
+              style={{ width: `${progress}%` }}
+              transition={{ duration: 0.1 }}
             />
           </div>
           <p className="text-gray-400 mt-4">{progress}%</p>
+          <p className="text-gray-600 text-sm mt-2">Loading cinematic experience...</p>
         </div>
       </div>
     );

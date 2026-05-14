@@ -203,7 +203,6 @@ const CinematicHero = () => {
             </svg>
           </motion.div>
         </motion.div>
-      </div>
     </div>
   );
 };
